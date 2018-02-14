@@ -1,5 +1,5 @@
 {
-  "name": "jincor-backend-ico-dashboard",
+  "name": "jincor-backend-portfolio",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -16,14 +16,12 @@
     ]
   },
   "dependencies": {
-    "abi-decoder": "1.0.9",
     "bcrypt-nodejs": "0.0.3",
     "bip39": "2.4.0",
     "body-parser": "~1.15.2",
     "bull": "3.3.4",
     "debug": "~2.2.0",
     "dotenv": "4.0.0",
-    "ethereumjs-wallet": "0.6.0",
     "express": "~4.14.0",
     "inversify": "4.2.0",
     "inversify-express-utils": "4.0.0",
@@ -35,12 +33,10 @@
     "morgan": "1.9.0",
     "node-mailjet": "3.2.1",
     "node-uuid": "^1.4.7",
-    "qr-image": "3.2.0",
     "reflect-metadata": "0.1.10",
     "rolling-rate-limiter": "0.1.9",
     "typeorm": "0.1.1",
-    "web-request": "1.0.7",
-    "web3": "1.0.0-beta.26"
+    "web-request": "1.0.7"
   },
   "devDependencies": {
     "@types/faker": "4.1.1",

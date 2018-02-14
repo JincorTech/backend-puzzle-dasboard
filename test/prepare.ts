@@ -9,7 +9,7 @@ prepare(function(done) {
     'port': 27017,
     'username': '',
     'password': '',
-    'database': 'ico-dashboard-test',
+    'database': 'portfolio-test',
     'synchronize': true,
     'logging': false,
     'entities': [

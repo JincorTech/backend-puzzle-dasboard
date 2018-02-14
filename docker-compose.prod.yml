@@ -1,6 +1,6 @@
 version: '2'
 services:
-  ico:
+  portfolio:
     image: registry.jincor.com/backend/ico:latest
     build:
       context: ./
@@ -15,28 +15,3 @@ services:
     volumes:
       - /root/ethereum-blockchain:/home/ethereum
     restart: always
-    networks:
-      default:
-        ipv4_address: 10.100.0.2
-
-  rpc:
-    image: registry.jincor.com/backend/parity-rpc-mainnet:latest
-    build:
-      context: ./
-      dockerfile: rpc.mainnet.Dockerfile
-    ports:
-      - "8546"
-    volumes:
-      - /root/parity:/root/.local/share/io.parity.ethereum
-    restart: always
-    networks:
-      default:
-        ipv4_address: 10.100.0.5
-
-networks:
-  default:
-    driver: bridge
-    ipam:
-      config:
-        - subnet: 10.100.0.0/16
-          gateway: 10.100.0.1

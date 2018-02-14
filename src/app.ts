@@ -14,26 +14,9 @@ if (config.app.accessLog === 'true') {
   app.use(morgan('combined'));
 }
 
-if (process.env.ENVIRONMENT === 'production') {
-  app.use((req: any, res: Response, next: NextFunction) => {
-    if (!req.client.authorized && req.path !== '/dashboard/public') {
-      return res.status(401).send({error: 'Invalid client certificate'});
-    }
-    next();
-  });
-}
-
 app.disable('x-powered-by');
 
 app.use((req: Request, res: Response, next: NextFunction) => {
-  if (config.app.forceHttps === 'enabled') {
-    if (!req.secure) {
-      return res.redirect('https://' + req.hostname + ':' + config.app.httpsPort + req.originalUrl);
-    }
-
-    res.setHeader('Strict-Transport-Security', 'max-age=31536000');
-  }
-
   if (req.method !== 'OPTIONS' && req.header('Accept') !== 'application/json' && req.header('Content-Type') === 'application/json') {
     return res.status(406).json({
       error: 'Unsupported "Accept" header'

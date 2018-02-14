@@ -10,7 +10,7 @@ It was implemented to provide following functionality:
 1. Token purchase.
 1. Displaying Investor's transaction history.
 1. All important actions are protected with 2FA (email or google authenticator) by integration with Jincor Backend Verify service (https://github.com/JincorTech/backend-verify)
-1. For more info check API docs: https://jincortech.github.io/backend-ico-dashboard
+1. For more info check API docs: https://jincortech.github.io/backend-portfolio
 
 ## Technology stack
 
@@ -25,8 +25,8 @@ It was implemented to provide following functionality:
 1. Run `docker-compose build --no-cache`.
 1. Run `docker-compose up -d`.
 1. Run `cp .env.test .env`.
-1. To install dependencies run `docker-compose exec ico npm i`.
-1. Run tests `docker-compose exec ico npm test`.
+1. To install dependencies run `docker-compose exec portfolio npm i`.
+1. Run tests `docker-compose exec portfolio npm test`.
 
 ## How to generate docs?
 

@@ -5,8 +5,8 @@ beforeEach(function(done) {
   container.snapshot();
 
   restore({
-    uri: 'mongodb://mongo:27017/ico-dashboard-test',
-    root: __dirname + '/dump/ico-dashboard-test',
+    uri: 'mongodb://mongo:27017/portfolio-test',
+    root: __dirname + '/dump/portfolio-test',
     drop: true,
     callback: function() {
       done();
