@@ -118,7 +118,7 @@ export class PortfolioController {
         exposure: 140394, //TODO
         profitLoss: {
             value: (asset.totalAmount * currentPrice) - moneySpent,//(asset.totalAmount / 100) * currentPrice * change * -1,
-            change: moneySpent / (asset.totalAmount * currentPrice) - moneySpent
+            change: 100 - (((asset.totalAmount * currentPrice) / moneySpent) * 100)
         },
         weight: 4.44 //TODO
       });
