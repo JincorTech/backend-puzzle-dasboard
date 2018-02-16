@@ -97,7 +97,7 @@ export class PortfolioController {
       let moneySpent = 0;
       for  (let transaction of transactions) {
         let time = new Date(transaction.timestamp * 1000);
-        let val = transaction.value *  (await cryptocompare.priceHistorical(asset.symbol, 'USD', time)).USD;
+        let val = transaction.value *  transaction.price;
         if (transaction.direction === true) {
           moneySpent += val;
         } else {
@@ -118,7 +118,7 @@ export class PortfolioController {
         exposure: 140394, //TODO
         profitLoss: {
             value: (asset.totalAmount * currentPrice) - moneySpent,//(asset.totalAmount / 100) * currentPrice * change * -1,
-            change: ((asset.totalAmount * currentPrice) / moneySpent) * 100
+            change: moneySpent / (asset.totalAmount * currentPrice) - moneySpent
         },
         weight: 4.44 //TODO
       });
