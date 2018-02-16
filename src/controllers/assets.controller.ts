@@ -38,7 +38,7 @@ export class AssetsController {
   )
   async transactions(req: Request, res: Response): Promise<void> {
     const asset = await getConnection().getMongoRepository(Asset).findOne({symbol: req.query.asset});
-    const transactions = await getMongoManager().createEntityCursor(Transaction, {"asset.symbol": asset.symbol, isDeleted: false}).toArray();
+    const transactions = await getMongoManager().createEntityCursor(Transaction, {"asset.symbol": asset.symbol}).toArray();
     res.json(
       {
         asset: asset.name,

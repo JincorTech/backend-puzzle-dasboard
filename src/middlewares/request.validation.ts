@@ -1,6 +1,5 @@
 import * as Joi from 'joi';
 import { Response, Request, NextFunction } from 'express';
-import { AuthorizedRequest } from '../requests/authorized.request';
 import { base64decode } from '../helpers/helpers';
 
 const options = {
@@ -83,65 +82,6 @@ export function verifyLogin(req: Request, res: Response, next: NextFunction) {
       code: Joi.string().required(),
       method: Joi.string().required()
     })
-  });
-
-  const result = Joi.validate(req.body, schema, options);
-
-  if (result.error) {
-    return res.status(422).json(result);
-  } else {
-    return next();
-  }
-}
-
-export function changePassword(req: AuthorizedRequest, res: Response, next: NextFunction) {
-  const schema = Joi.object().keys({
-    oldPassword: Joi.string().required(),
-    newPassword: Joi.string().required().regex(passwordRegex)
-  });
-
-  const result = Joi.validate(req.body, schema, options);
-
-  if (result.error) {
-    return res.status(422).json(result);
-  } else {
-    return next();
-  }
-}
-
-export function inviteUser(req: AuthorizedRequest, res: Response, next: NextFunction) {
-  const schema = Joi.object().keys({
-    emails: Joi.array().required().max(5).min(1).items(Joi.string().email())
-  });
-
-  const result = Joi.validate(req.body, schema, options);
-
-  if (result.error) {
-    return res.status(422).json(result);
-  } else {
-    return next();
-  }
-}
-
-export function resetPasswordInitiate(req: AuthorizedRequest, res: Response, next: NextFunction) {
-  const schema = Joi.object().keys({
-    email: Joi.string().required().email()
-  });
-
-  const result = Joi.validate(req.body, schema, options);
-
-  if (result.error) {
-    return res.status(422).json(result);
-  } else {
-    return next();
-  }
-}
-
-export function resetPasswordVerify(req: AuthorizedRequest, res: Response, next: NextFunction) {
-  const schema = Joi.object().keys({
-    email: Joi.string().required().email(),
-    password: Joi.string().required().regex(passwordRegex),
-    verification: verificationSchema
   });
 
   const result = Joi.validate(req.body, schema, options);
