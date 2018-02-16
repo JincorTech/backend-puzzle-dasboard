@@ -5,6 +5,7 @@ import 'reflect-metadata';
 import config from '../config';
 import { getConnection, getMongoManager } from 'typeorm';
 import { Asset } from '../entities/asset';
+import  { Transaction } from '../entities/transaction';
 import * as mongodb from "mongodb";
 import fetch from "node-fetch";
 global.fetch = fetch;
@@ -92,6 +93,17 @@ export class PortfolioController {
     prevTime.setDate(prevTime.getDate() - 1);
     let response = [];
     for (let asset of assets) {
+      const transactions = await getMongoManager().createEntityCursor(Transaction, {"asset.symbol": asset.symbol}).toArray();
+      let moneySpent = 0;
+      for  (let transaction of transactions) {
+        let time = new Date(transaction.timestamp * 1000);
+        let val = transaction.value *  (await cryptocompare.priceHistorical(asset.symbol, 'USD', time)).USD;
+        if (transaction.direction === true) {
+          moneySpent += val;
+        } else {
+          moneySpent -= val;
+        }
+      }
       let currentPrice = (await cryptocompare.price(asset.symbol, 'USD')).USD;
       let prevPrice = (await cryptocompare.priceHistorical(asset.symbol, 'USD', prevTime)).USD;
       let change = ((currentPrice - prevPrice)  / prevPrice) * 100;
@@ -105,8 +117,8 @@ export class PortfolioController {
         },
         exposure: 140394, //TODO
         profitLoss: {
-            value: (asset.totalAmount / 100) * currentPrice * change * -1,
-            change: change * -1
+            value: (asset.totalAmount * currentPrice) - moneySpent,//(asset.totalAmount / 100) * currentPrice * change * -1,
+            change: ((asset.totalAmount * currentPrice) / moneySpent) * 100
         },
         weight: 4.44 //TODO
       });
