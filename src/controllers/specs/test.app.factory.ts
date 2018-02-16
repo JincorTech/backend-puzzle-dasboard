@@ -5,7 +5,6 @@ import * as TypeMoq from 'typemoq';
 import { container } from '../../ioc.container';
 import { InversifyExpressServer } from 'inversify-express-utils';
 import * as bodyParser from 'body-parser';
-import { Auth } from '../../middlewares/auth';
 import handle from '../../middlewares/error.handler';
 
 export const buildApp = () => {

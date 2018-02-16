@@ -3,6 +3,7 @@ import { Response, Request, NextFunction, Application } from 'express';
 import * as bodyParser from 'body-parser';
 import config from './config';
 import handle from './middlewares/error.handler';
+import fetch from 'node-fetch';
 const morgan = require('morgan');
 
 import { InversifyExpressServer } from 'inversify-express-utils';

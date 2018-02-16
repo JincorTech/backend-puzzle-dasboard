@@ -12,12 +12,8 @@ services:
     volumes:
       - ./:/usr/src/app
     links:
-      - auth
       - redis
-      - verify
-      - rpc
     depends_on:
-      - rpc
       - mongo
     tty: true
     networks:

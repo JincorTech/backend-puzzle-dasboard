@@ -19,9 +19,9 @@ const getRequest = (customApp, url: string) => {
 
 describe('Dashboard', () => {
   describe('GET /summary', () => {
-    it('should get expected tx fee', (done) => {
+    it('should return 200', (done) => {
 
-      getRequest(factory.buildApp(), '/porrtfolio/summary').end((err, res) => {
+      getRequest(factory.buildApp(), '/portfolio/summary').end((err, res) => {
         expect(res.status).to.equal(200);
         done();
       });
