@@ -34,6 +34,7 @@ export class PortfolioController {
     let monthValue = 0;
     let tMonthValue = 0;
     const currentTimestamp = Math.floor(Date.now() / 1000);
+    let moneySpent = 0;
     for (let asset of assets) {
       let prevTime = new Date();
       prevTime.setDate(prevTime.getDate() - 1);
@@ -57,6 +58,17 @@ export class PortfolioController {
       weekValue += weekPrice.USD * asset.totalAmount;
       monthValue += monthPrice.USD * asset.totalAmount;
       tMonthValue += tMonthPrice.USD * asset.totalAmount;
+
+      const transactions = await getMongoManager().createEntityCursor(Transaction, {"asset.symbol": asset.symbol}).toArray();
+      for  (let transaction of transactions) {
+        let time = new Date(transaction.timestamp * 1000);
+        let val = transaction.value *  transaction.price;
+        if (transaction.direction === true) {
+          moneySpent += val;
+        } else {
+          moneySpent -= val;
+        }
+      }
     }
     console.log("Total value: ", totalValue);
     console.log("Prev value: ", prevTotalValue);
@@ -75,8 +87,8 @@ export class PortfolioController {
             oneMonth: monthChange,
             threeMonths: tMonthChange
         },
-        caquisitionCost: 1291450,
-        profitLoss: (totalValue / 100) * change * -1
+        aquisitionCost: 1291450,
+        profitLoss: totalValue - moneySpent
       }
     );
   }
