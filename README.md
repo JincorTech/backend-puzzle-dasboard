@@ -1,23 +1,4 @@
-![](https://habrastorage.org/webt/59/d5/42/59d542206afbe280817420.png)
-
-# Jincor ICO Dashboard Backend
-This is backend module of Jincor ICO dashboard: https://contribute.jincor.com.
-
-It was implemented to provide following functionality:
-1. ICO investors sign up.
-1. Generation of Ethereum address upon user activation.
-1. KYC verification using Jumio Netverify service (https://www.jumio.com/trusted-identity/netverify).
-1. Token purchase.
-1. Displaying Investor's transaction history.
-1. All important actions are protected with 2FA (email or google authenticator) by integration with Jincor Backend Verify service (https://github.com/JincorTech/backend-verify)
-1. For more info check API docs: https://jincortech.github.io/backend-portfolio
-
-## Technology stack
-
-1. Typescript, Express, InversifyJS (DI), TypeORM (MongoDB interaction).
-1. Web3JS - interaction with Ethereum client. ICO backend supports any JSON-RPC compliant client.
-1. Mocha/chai - unit/functional tests.
-1. Docker.
+# Puzzle fund internal dashboard
 
 ## How to start development and run tests?
 
